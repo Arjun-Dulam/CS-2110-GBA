@@ -98,6 +98,10 @@ int main(void) {
       case PLAY_REGULAR:
         moveEntity(&Steve, currentButtons, BROWN);
 
+        if (Steve.row < 20) {
+          state = DEATH;
+        }
+
         break;
 
       case WIN:
