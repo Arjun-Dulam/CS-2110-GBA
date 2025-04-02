@@ -111,6 +111,11 @@ int main(void) {
       case DEATH:
         drawFullScreenImageDMA(youDied);
 
+        if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
+          state = START;
+        }
+
+
         // state = ?
         break;
     }
