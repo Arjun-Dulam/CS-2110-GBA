@@ -127,12 +127,17 @@ int main(void) {
           state = DEATH_INITIAL;
         } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
           state = START_INITIAL;
-        } 
+        } else if (isFullyContained(&Mountain, &Boulder)) {
+          state = TEMP_SUCCESS;
+        }
 
         break;
 
       case TEMP_SUCCESS:
 
+
+
+      
         // state = ?
         break;
       case DEATH_INITIAL:
@@ -160,7 +165,6 @@ int main(void) {
           Boulder.col = 200;
           state = START_INITIAL;
         }
-
         break;
     }
 

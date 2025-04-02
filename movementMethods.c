@@ -37,3 +37,20 @@ bool detectCollision(entity *a, entity *b) {
     }
     return true;
 }
+
+bool isFullyContained(entity *box, entity *boulder) {
+    int boxLeft = box->col;
+    int boxTop = box->row;
+    int boxRight = box->col + 25;
+    int boxBottom = box->row + 25;
+
+    int boulderLeft = boulder->col;
+    int boulderTop = boulder->row;
+    int boulderRight = boulder->col + 10;
+    int boulderBottom = boulder->row + 10;
+
+    return (boulderTop >= boxTop &&
+        boulderLeft >= boxLeft &&
+        boulderBottom <= boxBottom &&
+        boulderRight <= boxRight);
+}
