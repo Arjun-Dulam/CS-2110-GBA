@@ -102,11 +102,24 @@ int main(void) {
       case PLAY_REGULAR:
         moveEntity(&Steve, currentButtons, BROWN);
 
+        if (detectCollision(&Steve, &Boulder)) {
+          if (KEY_DOWN(BUTTON_UP, currentButtons) && Boulder.row > 20) {
+            Boulder.row--;
+            state = DEATH_INITIAL;
+          } else if (KEY_DOWN(BUTTON_DOWN, currentButtons) && Boulder.row + 10 < HEIGHT) {
+            Boulder.row++;
+          } else if (KEY_DOWN(BUTTON_LEFT, currentButtons) && Boulder.col < 0) {
+            Boulder.col--;
+          } else if (KEY_DOWN(BUTTON_RIGHT, currentButtons) && Boulder.col + 10 < WIDTH) {
+            Boulder.col++;
+          }
+        }
+
         if (Steve.row < 20) {
           state = DEATH_INITIAL;
         } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
           state = START_INITIAL;
-        }
+        } 
 
         break;
 
