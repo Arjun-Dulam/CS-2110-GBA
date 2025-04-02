@@ -122,8 +122,8 @@ int main(void) {
         drawCenteredString(40, 0, WIDTH, 10, "You must continue your punishment.", WHITE);
         drawCenteredString(120, 0, WIDTH, 10, "Press delete to start again.", WHITE);
         
-        char deathSTR[4];
-        snprintf(deathSTR, 10 + sizeof(deathsINT), "Deaths = %d", deathsINT);
+        char deathSTR[16]; // Increased size to safely hold the formatted string
+        snprintf(deathSTR, sizeof(deathSTR), "Deaths = %d", deathsINT);
 
         drawCenteredString(140, 0, WIDTH, 10, deathSTR, WHITE);
         state = DEATH_REGULAR;
