@@ -92,6 +92,7 @@ int main(void) {
         drawImageDMA(Steve.row, Steve.col, STEVE_HEIGHT, STEVE_WIDTH, steve); 
         drawImageDMA(Boulder.row, Boulder.col, BOULDER_HEIGHT, BOULDER_WIDTH, boulder);
         
+        
         state = PLAY_REGULAR;
         break;
         
@@ -100,6 +101,8 @@ int main(void) {
 
         if (Steve.row < 20) {
           state = DEATH;
+        } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
+          state = START;
         }
 
         break;
@@ -111,7 +114,11 @@ int main(void) {
       case DEATH:
         drawFullScreenImageDMA(youDied);
 
-        if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
+        if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
+          Steve.row = 50;
+          Steve.col = 40;
+          Boulder.row = 100;
+          Boulder.col = 200;
           state = START;
         }
 
