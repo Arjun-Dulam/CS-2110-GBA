@@ -24,12 +24,13 @@
 // Add any additional states you need for your app. You are not required to use
 // these specific provided states.
 enum gba_state {
-  START,
-  START2,
+  START_INITIAL,
+  START_REGULAR,
   PLAY_INITIAL,
   PLAY_REGULAR,
   WIN,
-  DEATH,
+  DEATH_INITIAL,
+  DEATH_REGULAR
 };
 
 static entity Steve = {
@@ -57,7 +58,7 @@ int main(void) {
 
   // Load initial application state
 
-  enum gba_state state = START;
+  enum gba_state state = START_INITIAL;
 
   while (1) {
     currentButtons = BUTTONS; // Load the current state of the buttons
@@ -69,15 +70,15 @@ int main(void) {
     waitForVBlank();
 
     switch (state) {
-      case START:
+      case START_INITIAL:
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
 
         
-        state = START2;
+        state = START_REGULAR;
         break;
         
-      case START2:
+      case START_REGULAR:
         drawString(135 , 60, "Press Enter to Start", WHITE);
         
         if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
@@ -100,9 +101,9 @@ int main(void) {
         moveEntity(&Steve, currentButtons, BROWN);
 
         if (Steve.row < 20) {
-          state = DEATH;
+          state = DEATH_INITIAL;
         } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
-          state = START;
+          state = START_INITIAL;
         }
 
         break;
@@ -111,19 +112,23 @@ int main(void) {
 
         // state = ?
         break;
-      case DEATH:
+      case DEATH_INITIAL:
         drawFullScreenImageDMA(youDied);
+        drawCenteredString(120, 0, WIDTH, 20, "Press delete to start again.", WHITE);
+        state = DEATH_REGULAR;
+        break;
 
+      case DEATH_REGULAR:
         if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
+          // resetting position
+
           Steve.row = 50;
           Steve.col = 40;
           Boulder.row = 100;
           Boulder.col = 200;
-          state = START;
+          state = START_INITIAL;
         }
 
-
-        // state = ?
         break;
     }
 
