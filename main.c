@@ -11,6 +11,7 @@
 #include "images/boulder.h"
 #include "images/youDied.h"
 #include "images/mountain.h"
+#include "images/fallout.h"
 
 
 /* TODO: */
@@ -29,7 +30,8 @@ enum gba_state {
   START_REGULAR,
   PLAY_INITIAL,
   PLAY_REGULAR,
-  TEMP_SUCCESS,
+  TEMP_SUCCESS_INITIAL,
+  TEMP_SUCCESS_REGULAR,
   DEATH_INITIAL,
   DEATH_REGULAR
 };
@@ -128,17 +130,28 @@ int main(void) {
         } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
           state = START_INITIAL;
         } else if (isFullyContained(&Mountain, &Boulder)) {
-          state = TEMP_SUCCESS;
+          state = TEMP_SUCCESS_INITIAL;
         }
 
         break;
 
-      case TEMP_SUCCESS:
+      case TEMP_SUCCESS_INITIAL:
+        Steve.row = 50;
+        Steve.col = 40;
+        Boulder.row = 100;
+        Boulder.col = 200;
 
+        drawImageDMA(0, 0, FALLOUT_WIDTH, FALLOUT_HEIGHT, fallout);
+        drawCenteredString(0, 0, WIDTH, 20, "You must do this forever. Have fun!", WHITE);
 
+        state = TEMP_SUCCESS_REGULAR;
 
+        break;
       
-        // state = ?
+      case TEMP_SUCCESS_REGULAR:
+        if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
+          state = START_INITIAL;
+        }
         break;
       case DEATH_INITIAL:
         deathsINT++;

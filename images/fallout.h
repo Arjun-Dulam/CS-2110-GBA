@@ -1,7 +1,7 @@
 /*
  * Exported with nin10kit v1.8
  * Invocation command was nin10kit --mode=3 --resize=240x160 fallout fallout.png 
- * Time-stamp: Wednesday 04/02/2025, 19:11:27
+ * Time-stamp: Wednesday 04/02/2025, 19:48:07
  * 
  * Image Information
  * -----------------
