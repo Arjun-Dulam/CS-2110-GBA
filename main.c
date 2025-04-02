@@ -55,6 +55,7 @@ static entity Mountain = {
 };
 
 int deathsINT = 0;
+int floatOffset;
 
 
 int main(void) {
@@ -88,12 +89,30 @@ int main(void) {
         break;
         
       case START_REGULAR:
-        drawString(135 , 60, "Press Enter to Start", WHITE);
+        drawString(135, 60, "Press Enter to Start", WHITE);
         
         if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
           state = PLAY_INITIAL;
         }
-        
+
+        // Manipulate floatOffset to make the rows go up and down within a range of 10
+        static int direction = 1; // 1 for down, -1 for up
+        floatOffset += direction;
+
+        if (floatOffset > 10) {
+          floatOffset = 10;
+          direction = -1;
+        } else if (floatOffset < 0) {
+          floatOffset = 0;
+          direction = 1;
+        }
+
+        // Fill the old sprite area with black
+        drawRectDMA(20, 10, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
+
+        // Draw the new image with updated position
+        drawImageDMA(20 + floatOffset, 10, BOULDER_WIDTH, BOULDER_HEIGHT, boulder);
+
         break;
         
       case PLAY_INITIAL:
