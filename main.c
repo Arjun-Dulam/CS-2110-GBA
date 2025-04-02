@@ -10,6 +10,7 @@
 #include "images/steve.h"
 #include "images/boulder.h"
 #include "images/youDied.h"
+#include "images/mountain.h"
 
 
 /* TODO: */
@@ -45,6 +46,12 @@ static entity Boulder = {
   .image = boulder
 };
 
+static entity Mountain = {
+  .row = 100,
+  .col = 30,
+  .image = mountain
+};
+
 int deathsINT = 0;
 
 
@@ -64,7 +71,6 @@ int main(void) {
 
   while (1) {
     currentButtons = BUTTONS; // Load the current state of the buttons
-    
 
     /* TODO: */
     // Manipulate the state machine below as needed //
@@ -93,7 +99,7 @@ int main(void) {
         drawRectDMA(0, 0, WIDTH, 20, GREY);
         drawImageDMA(Steve.row, Steve.col, STEVE_HEIGHT, STEVE_WIDTH, steve); 
         drawImageDMA(Boulder.row, Boulder.col, BOULDER_HEIGHT, BOULDER_WIDTH, boulder);
-        drawRectDMA(100, 30, 25, 25, LIGHT_BROWN);
+        drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
         
         
         state = PLAY_REGULAR;
