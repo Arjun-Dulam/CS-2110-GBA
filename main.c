@@ -45,6 +45,8 @@ static entity Boulder = {
   .image = boulder
 };
 
+int deathsINT = 0;
+
 
 int main(void) {
   /* TODO: */
@@ -113,11 +115,17 @@ int main(void) {
         // state = ?
         break;
       case DEATH_INITIAL:
+        deathsINT++;
         drawImageDMA(0, 0, YOUDIED_WIDTH, YOUDIED_HEIGHT - 40, youDied);
         drawRectDMA(120, 0, WIDTH, 40, BLACK);
         drawCenteredString(20, 0, WIDTH, 10, "Death is not an escape.", WHITE);
         drawCenteredString(40, 0, WIDTH, 10, "You must continue your punishment.", WHITE);
         drawCenteredString(120, 0, WIDTH, 10, "Press delete to start again.", WHITE);
+        
+        char deathSTR[4];
+        snprintf(deathSTR, 10 + sizeof(deathsINT), "Deaths = %d", deathsINT);
+
+        drawCenteredString(140, 0, WIDTH, 10, deathSTR, WHITE);
         state = DEATH_REGULAR;
         break;
 
