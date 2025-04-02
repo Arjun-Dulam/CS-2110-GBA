@@ -74,7 +74,6 @@ int main(void) {
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
 
-        
         state = START_REGULAR;
         break;
         
@@ -92,6 +91,7 @@ int main(void) {
         drawRectDMA(0, 0, WIDTH, 20, GREY);
         drawImageDMA(Steve.row, Steve.col, STEVE_HEIGHT, STEVE_WIDTH, steve); 
         drawImageDMA(Boulder.row, Boulder.col, BOULDER_HEIGHT, BOULDER_WIDTH, boulder);
+        drawRectDMA(100, 30, 25, 25, LIGHT_BROWN);
         
         
         state = PLAY_REGULAR;
