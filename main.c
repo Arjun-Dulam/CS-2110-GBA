@@ -28,7 +28,7 @@ enum gba_state {
   START_REGULAR,
   PLAY_INITIAL,
   PLAY_REGULAR,
-  WIN,
+  TEMP_SUCCESS,
   DEATH_INITIAL,
   DEATH_REGULAR
 };
@@ -108,13 +108,16 @@ int main(void) {
 
         break;
 
-      case WIN:
+      case TEMP_SUCCESS:
 
         // state = ?
         break;
       case DEATH_INITIAL:
-        drawFullScreenImageDMA(youDied);
-        drawCenteredString(120, 0, WIDTH, 20, "Press delete to start again.", WHITE);
+        drawImageDMA(0, 0, YOUDIED_WIDTH, YOUDIED_HEIGHT - 40, youDied);
+        drawRectDMA(120, 0, WIDTH, 40, BLACK);
+        drawCenteredString(20, 0, WIDTH, 10, "Death is not an escape.", WHITE);
+        drawCenteredString(40, 0, WIDTH, 10, "You must continue your punishment.", WHITE);
+        drawCenteredString(120, 0, WIDTH, 10, "Press delete to start again.", WHITE);
         state = DEATH_REGULAR;
         break;
 
