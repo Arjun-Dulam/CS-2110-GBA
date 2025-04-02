@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"gba.h": "c"
+		},
+		"github.copilot.editor.enableAutoCompletions": false
+	}
+}
