@@ -106,6 +106,10 @@ int main(void) {
           state = START_INITIAL;
         }
 
+        if (detectCollision(&Steve, &Boulder)) {
+          state = DEATH_INITIAL;
+        }
+
         break;
 
       case WIN:
