@@ -6,7 +6,20 @@ This is a Game Boy Advance (GBA) game inspired by the myth of **Sisyphus**, a fi
 The game is implemented in **C** and uses the GBA's **Mode 3** graphics mode. It features a state machine to manage different game states, such as asking for preferences, gameplay, success, and death.
 
 ---
+## **How to Run**
+Enter the Docker container:
+`
+./cs2110docker-gba.sh
+`
 
+Make the project:
+`
+make mgba
+`
+
+Play the Game!
+
+---
 ## **Game Mechanics**
 1. **Themes**:
    - At the start, the player chooses between two themes:
