@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "gba.h": "c"
+        "gba.h": "c",
+        "movementmethods.h": "c"
     },
     "github.copilot.editor.enableAutoCompletions": false
 }

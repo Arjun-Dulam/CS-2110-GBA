@@ -26,6 +26,7 @@
 // Add any additional states you need for your app. You are not required to use
 // these specific provided states.
 enum gba_state {
+  ASK_NAME,
   START_INITIAL,
   START_REGULAR,
   PLAY_INITIAL,
@@ -56,6 +57,7 @@ static entity Mountain = {
 
 int deathsINT = 0;
 int floatOffset;
+int steps;
 
 
 int main(void) {
@@ -70,7 +72,7 @@ int main(void) {
 
   // Load initial application state
 
-  enum gba_state state = START_INITIAL;
+  enum gba_state state = ASK_NAME;
 
   while (1) {
     currentButtons = BUTTONS; // Load the current state of the buttons
@@ -81,6 +83,9 @@ int main(void) {
     waitForVBlank();
 
     switch (state) {
+      case ASK_NAME:
+
+
       case START_INITIAL:
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
@@ -93,7 +98,7 @@ int main(void) {
         
         if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
           state = PLAY_INITIAL;
-        }
+        } 
 
         // Manipulate floatOffset to make the rows go up and down within a range of 10
         static int direction = 1; // 1 for down, -1 for up
@@ -131,8 +136,9 @@ int main(void) {
         break;
         
       case PLAY_REGULAR:
+        
         drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
-        moveEntity(&Steve, currentButtons, BROWN);
+        moveEntity(&Steve, currentButtons, BROWN, &steps);
 
         if (detectCollision(&Steve, &Boulder)) {
           // if (KEY_DOWN(BUTTON_UP, currentButtons) && Boulder.row > 20) {
@@ -144,7 +150,7 @@ int main(void) {
           // } else if (KEY_DOWN(BUTTON_RIGHT, currentButtons) && Boulder.col + 10 < WIDTH) {
           //   Boulder.col++;
           // }
-          moveEntity(&Boulder, currentButtons, BROWN);
+            moveEntity(&Boulder, currentButtons, BROWN, NULL);
         }
 
         drawImageDMA(Boulder.row, Boulder.col, 10, 10, boulder);
@@ -176,6 +182,15 @@ int main(void) {
         if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
           state = START_INITIAL;
         }
+
+
+
+
+
+
+
+
+
         break;
       case DEATH_INITIAL:
         deathsINT++;

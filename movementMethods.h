@@ -7,7 +7,7 @@
 #include "main.h"
 
 // Function prototype for moveEntity
-void moveEntity(entity *e, u32 currentButtons, u16 backgroundColor);
+void moveEntity(entity *e, u32 currentButtons, u16 backgroundColor, int *steps);
 
 bool detectCollision(entity *a, entity *b);
 
