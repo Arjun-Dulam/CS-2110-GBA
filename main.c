@@ -109,9 +109,13 @@ int main(void) {
 
         // Fill the old sprite area with black
         drawRectDMA(20, 10, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
+        drawRectDMA(20, 230, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
+
 
         // Draw the new image with updated position
         drawImageDMA(20 + floatOffset, 10, BOULDER_WIDTH, BOULDER_HEIGHT, boulder);
+        drawImageDMA(20 + floatOffset, 230, BOULDER_WIDTH, BOULDER_HEIGHT, boulder);
+
 
         break;
         
