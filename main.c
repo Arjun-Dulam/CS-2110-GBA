@@ -99,8 +99,10 @@ int main(void) {
       case ASK_PREFERENCE_REGULAR:
         if (KEY_JUST_PRESSED(BUTTON_UP, currentButtons, previousButtons)) {
           preference = 0; // ocean theme
+          state = START_INITIAL;
         } else if (KEY_JUST_PRESSED(BUTTON_DOWN, currentButtons, previousButtons)) {
           preference = 1; // mountain theme
+          state = START_INITIAL;
         }
         break;
 
@@ -147,14 +149,14 @@ int main(void) {
         drawRectDMA(0, 0, WIDTH, 20, GREY);
         drawImageDMA(Steve.row, Steve.col, STEVE_HEIGHT, STEVE_WIDTH, steve); 
         drawImageDMA(Boulder.row, Boulder.col, BOULDER_HEIGHT, BOULDER_WIDTH, boulder);
-        drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
+        drawRectDMA(100, 30, 25, 25, preference == 0 ? LIGHT_BLUE : LIGHT_BROWN);
         
         
         state = PLAY_REGULAR;
         break;
         
       case PLAY_REGULAR:
-        drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
+        drawRectDMA(100, 30, 25, 25, preference == 0 ? LIGHT_BLUE : LIGHT_BROWN);
         moveEntity(&Steve, currentButtons, BROWN, &stepsINT);
 
         drawRectDMA(10, WIDTH / 2, WIDTH / 2, 10, GREY);
