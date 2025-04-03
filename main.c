@@ -26,7 +26,6 @@
 // Add any additional states you need for your app. You are not required to use
 // these specific provided states.
 enum gba_state {
-  ASK_NAME,
   START_INITIAL,
   START_REGULAR,
   PLAY_INITIAL,
@@ -58,7 +57,7 @@ static entity Mountain = {
 int deathsINT = 0;
 int floatOffset;
 int stepsINT;
-char stepsSTR[16];
+char stepsSTR[25];
 
 int main(void) {
   /* TODO: */
@@ -72,7 +71,7 @@ int main(void) {
 
   // Load initial application state
 
-  enum gba_state state = ASK_NAME;
+  enum gba_state state = START_INITIAL;
 
   while (1) {
     currentButtons = BUTTONS; // Load the current state of the buttons
@@ -83,9 +82,6 @@ int main(void) {
     waitForVBlank();
 
     switch (state) {
-      case ASK_NAME:
-
-
       case START_INITIAL:
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
