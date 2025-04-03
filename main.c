@@ -119,6 +119,7 @@ int main(void) {
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
         drawCenteredString(20, 0, WIDTH, 10, "Press Delete to Restart Game", WHITE);
         drawCenteredString(135, 0, WIDTH, 10, "Press Enter to Start", WHITE);
+        stepsINT = 0;
 
         state = START_REGULAR;
         break;
