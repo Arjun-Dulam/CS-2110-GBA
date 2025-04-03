@@ -170,7 +170,7 @@ int main(void) {
         moveEntity(&Steve, currentButtons, preference == 0 ? BLUE : BROWN, &stepsINT);
 
         drawRectDMA(10, WIDTH / 2, WIDTH / 2, 10, GREY);
-        snprintf(stepsSTR, sizeof(stepsSTR), "%d", stepsINT / 20);
+        snprintf(stepsSTR, sizeof(stepsSTR), "%d steps", stepsINT / 20);
         drawCenteredString(10, WIDTH / 2, WIDTH / 2, 10, stepsSTR, WHITE);
 
         if (detectCollision(&Steve, &Boulder)) {
@@ -247,8 +247,6 @@ int main(void) {
 
     previousButtons = currentButtons; // Store the current state of the buttons
   }
-
-  UNUSED(previousButtons); // You can remove this once previousButtons is used
 
   return 0;
 }
