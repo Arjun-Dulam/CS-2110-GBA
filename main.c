@@ -86,6 +86,13 @@ int main(void) {
 
     switch (state) {
       case ASK_PREFERENCE_INITIAL:
+        Steve.row = 50;
+        Steve.col = 40;
+        Boulder.col = 200;
+        Boulder.row = 100;
+        state = ASK_PREFERENCE_INITIAL;
+        stepsINT = 0;
+
         fillScreenDMA(BLACK);
         drawCenteredString(10, 0, WIDTH, 10, "What's your preference?", WHITE);
         drawCenteredString(30, 0, WIDTH, 10, "Press UP if you'd like Ocean Theme.", WHITE);
@@ -118,7 +125,9 @@ int main(void) {
         
         if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
           state = PLAY_INITIAL;
-        } 
+        } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
+          state = ASK_PREFERENCE_INITIAL;
+        }
 
         // Manipulate floatOffset to make the rows go up and down within a range of 10
         static int direction = 1; // 1 for down, -1 for up
@@ -145,7 +154,7 @@ int main(void) {
         break;
         
       case PLAY_INITIAL:
-        fillScreenDMA(BROWN);
+        fillScreenDMA(preference == 0 ? BLUE : BROWN);
         drawRectDMA(0, 0, WIDTH, 20, GREY);
         drawImageDMA(Steve.row, Steve.col, STEVE_HEIGHT, STEVE_WIDTH, steve); 
         drawImageDMA(Boulder.row, Boulder.col, BOULDER_HEIGHT, BOULDER_WIDTH, boulder);
@@ -157,7 +166,7 @@ int main(void) {
         
       case PLAY_REGULAR:
         drawRectDMA(100, 30, 25, 25, preference == 0 ? LIGHT_BLUE : LIGHT_BROWN);
-        moveEntity(&Steve, currentButtons, BROWN, &stepsINT);
+        moveEntity(&Steve, currentButtons, preference == 0 ? BLUE : BROWN, &stepsINT);
 
         drawRectDMA(10, WIDTH / 2, WIDTH / 2, 10, GREY);
         snprintf(stepsSTR, sizeof(stepsSTR), "%d", stepsINT / 20);
@@ -173,7 +182,7 @@ int main(void) {
           // } else if (KEY_DOWN(BUTTON_RIGHT, currentButtons) && Boulder.col + 10 < WIDTH) {
           //   Boulder.col++;
           // }
-            moveEntity(&Boulder, currentButtons, BROWN, NULL);
+            moveEntity(&Boulder, currentButtons, preference == 0 ? BLUE : BROWN, NULL);
         }
 
         drawImageDMA(Boulder.row, Boulder.col, 10, 10, boulder);
@@ -181,7 +190,7 @@ int main(void) {
         if (Steve.row < 20) {
           state = DEATH_INITIAL;
         } else if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons))  {
-          state = START_INITIAL;
+          state = ASK_PREFERENCE_INITIAL;
         } else if (isFullyContained(&Mountain, &Boulder)) {
           state = TEMP_SUCCESS_INITIAL;
         }
@@ -203,11 +212,16 @@ int main(void) {
       
       case TEMP_SUCCESS_REGULAR:
         if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
-          state = START_INITIAL;
+          state = ASK_PREFERENCE_INITIAL;
         }
 
         break;
       case DEATH_INITIAL:
+        Steve.row = 50;
+        Steve.col = 40;
+        Boulder.col = 200;
+        Boulder.row = 100;
+      
         deathsINT++;
         drawImageDMA(0, 0, YOUDIED_WIDTH, YOUDIED_HEIGHT - 40, youDied);
         drawRectDMA(120, 0, WIDTH, 40, BLACK);
@@ -225,13 +239,7 @@ int main(void) {
       case DEATH_REGULAR:
         if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
           // resetting position
-
-          Steve.row = 50;
-          Steve.col = 40;
-          Boulder.row = 100;
-          Boulder.col = 200;
           state = START_INITIAL;
-          stepsINT = 0;
         }
         break;
     }
