@@ -12,7 +12,7 @@
 #include "images/youDied.h"
 #include "images/mountain.h"
 #include "images/fallout.h"
-
+#include "images/cowboy.h"
 
 /* TODO: */
 // Include any header files for title screen or exit
@@ -26,7 +26,8 @@
 // Add any additional states you need for your app. You are not required to use
 // these specific provided states.
 enum gba_state {
-  ASK_PREFERENCE,
+  ASK_PREFERENCE_INITIAL,
+  ASK_PREFERENCE_REGULAR,
   START_INITIAL,
   START_REGULAR,
   PLAY_INITIAL,
@@ -59,6 +60,7 @@ int deathsINT = 0;
 int floatOffset;
 int stepsINT;
 char stepsSTR[25];
+int preference;
 
 int main(void) {
   /* TODO: */
@@ -72,7 +74,7 @@ int main(void) {
 
   // Load initial application state
 
-  enum gba_state state = ASK_PREFERENCE;
+  enum gba_state state = ASK_PREFERENCE_INITIAL;
 
   while (1) {
     currentButtons = BUTTONS; // Load the current state of the buttons
@@ -83,13 +85,24 @@ int main(void) {
     waitForVBlank();
 
     switch (state) {
-      case ASK_PREFERENCE:
-        
+      case ASK_PREFERENCE_INITIAL:
+        fillScreenDMA(BLACK);
+        drawCenteredString(10, 0, WIDTH, 10, "What's your preference?", WHITE);
+        drawCenteredString(30, 0, WIDTH, 10, "Press UP if you'd like Ocean Theme.", WHITE);
+        drawCenteredString(50, 0, WIDTH, 10, "Press DOWN if you'd like Mountain Theme.", WHITE);
+        drawImageDMA(70, (WIDTH - COWBOY_WIDTH) / 2, COWBOY_WIDTH, COWBOY_HEIGHT, cowboy);
+
+        state = ASK_PREFERENCE_REGULAR;
+        break;
 
 
-
-
-
+      case ASK_PREFERENCE_REGULAR:
+        if (KEY_JUST_PRESSED(BUTTON_UP, currentButtons, previousButtons)) {
+          preference = 0; // ocean theme
+        } else if (KEY_JUST_PRESSED(BUTTON_DOWN, currentButtons, previousButtons)) {
+          preference = 1; // mountain theme
+        }
+        break;
 
       case START_INITIAL:
         fillScreenDMA(BLACK);
