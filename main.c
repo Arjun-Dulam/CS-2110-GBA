@@ -86,6 +86,7 @@ int main(void) {
 
     switch (state) {
       case ASK_PREFERENCE_INITIAL:
+        deathsINT = 0;
         Steve.row = 50;
         Steve.col = 40;
         Boulder.col = 200;
