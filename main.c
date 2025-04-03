@@ -131,6 +131,7 @@ int main(void) {
         break;
         
       case PLAY_REGULAR:
+        drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
         moveEntity(&Steve, currentButtons, BROWN);
 
         if (detectCollision(&Steve, &Boulder)) {
