@@ -84,12 +84,12 @@ int main(void) {
       case START_INITIAL:
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
+        drawString(135, 60, "Press Enter to Start", WHITE);
 
         state = START_REGULAR;
         break;
         
       case START_REGULAR:
-        drawString(135, 60, "Press Enter to Start", WHITE);
         
         if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
           state = PLAY_INITIAL;
@@ -108,8 +108,8 @@ int main(void) {
         }
 
         // Fill the old sprite area with black
-        drawRectDMA(20, 10, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
-        drawRectDMA(20, 230, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
+        drawRectDMA(20 + floatOffset - direction, 10, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
+        drawRectDMA(20 + floatOffset - direction, 230, BOULDER_WIDTH, BOULDER_HEIGHT, BLACK);
 
 
         // Draw the new image with updated position
