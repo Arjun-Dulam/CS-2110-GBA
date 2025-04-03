@@ -57,8 +57,8 @@ static entity Mountain = {
 
 int deathsINT = 0;
 int floatOffset;
-int steps;
-
+int stepsINT;
+char stepsSTR[16];
 
 int main(void) {
   /* TODO: */
@@ -136,9 +136,13 @@ int main(void) {
         break;
         
       case PLAY_REGULAR:
-        
         drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
-        moveEntity(&Steve, currentButtons, BROWN, &steps);
+        moveEntity(&Steve, currentButtons, BROWN, &stepsINT);
+
+        
+        snprintf(stepsSTR, sizeof(stepsSTR), "Steps = %d", stepsINT / 50);
+        drawCenteredString(10, WIDTH / 2, 10,  WIDTH / 2, stepsSTR, WHITE);
+
 
         if (detectCollision(&Steve, &Boulder)) {
           // if (KEY_DOWN(BUTTON_UP, currentButtons) && Boulder.row > 20) {
@@ -182,14 +186,6 @@ int main(void) {
         if (KEY_JUST_PRESSED(BUTTON_SELECT, currentButtons, previousButtons)) {
           state = START_INITIAL;
         }
-
-
-
-
-
-
-
-
 
         break;
       case DEATH_INITIAL:
