@@ -208,6 +208,7 @@ int main(void) {
 
         drawImageDMA(0, 0, FALLOUT_WIDTH, FALLOUT_HEIGHT, fallout);
         drawCenteredString(0, 0, WIDTH, 20, "You must do this forever. Have fun!", WHITE);
+        drawCenteredString(150, 0, WIDTH, 10, "Press Delete to Restart.", WHITE);
 
         state = TEMP_SUCCESS_REGULAR;
 
