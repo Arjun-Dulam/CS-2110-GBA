@@ -139,10 +139,9 @@ int main(void) {
         drawImageDMA(100, 30, MOUNTAIN_WIDTH, MOUNTAIN_HEIGHT, mountain);
         moveEntity(&Steve, currentButtons, BROWN, &stepsINT);
 
-        
-        snprintf(stepsSTR, sizeof(stepsSTR), "Steps = %d", stepsINT / 50);
-        drawCenteredString(10, WIDTH / 2, 10,  WIDTH / 2, stepsSTR, WHITE);
-
+        drawRectDMA(10, WIDTH / 2 + 20, WIDTH / 2 - 20, 10, GREY);
+        snprintf(stepsSTR, sizeof(stepsSTR), "Steps: %d", stepsINT / 75);
+        drawCenteredString(10, WIDTH / 2, WIDTH / 2, 10, stepsSTR, WHITE);
 
         if (detectCollision(&Steve, &Boulder)) {
           // if (KEY_DOWN(BUTTON_UP, currentButtons) && Boulder.row > 20) {
@@ -212,6 +211,7 @@ int main(void) {
           Boulder.row = 100;
           Boulder.col = 200;
           state = START_INITIAL;
+          stepsINT = 0;
         }
         break;
     }
