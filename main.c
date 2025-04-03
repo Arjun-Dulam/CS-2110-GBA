@@ -26,6 +26,7 @@
 // Add any additional states you need for your app. You are not required to use
 // these specific provided states.
 enum gba_state {
+  ASK_PREFERENCE,
   START_INITIAL,
   START_REGULAR,
   PLAY_INITIAL,
@@ -71,7 +72,7 @@ int main(void) {
 
   // Load initial application state
 
-  enum gba_state state = START_INITIAL;
+  enum gba_state state = ASK_PREFERENCE;
 
   while (1) {
     currentButtons = BUTTONS; // Load the current state of the buttons
@@ -82,6 +83,14 @@ int main(void) {
     waitForVBlank();
 
     switch (state) {
+      case ASK_PREFERENCE:
+        
+
+
+
+
+
+
       case START_INITIAL:
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
