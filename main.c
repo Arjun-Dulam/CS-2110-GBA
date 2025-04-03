@@ -117,7 +117,8 @@ int main(void) {
       case START_INITIAL:
         fillScreenDMA(BLACK);
         drawImageDMA(40, 60, SISYPHUS_WIDTH, SISYPHUS_HEIGHT, sisyphus);
-        drawString(135, 60, "Press Enter to Start", WHITE);
+        drawCenteredString(20, 0, WIDTH, 10, "Press Delete to Restart Game", WHITE);
+        drawCenteredString(135, 0, WIDTH, 10, "Press Enter to Start", WHITE);
 
         state = START_REGULAR;
         break;
