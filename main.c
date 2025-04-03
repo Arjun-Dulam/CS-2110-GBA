@@ -97,7 +97,7 @@ int main(void) {
         fillScreenDMA(BLACK);
         drawCenteredString(10, 0, WIDTH, 10, "What's your preference?", WHITE);
         drawCenteredString(30, 0, WIDTH, 10, "Press UP if you'd like Ocean Theme.", WHITE);
-        drawCenteredString(50, 0, WIDTH, 10, "Press DOWN if you'd like Mountain Theme.", WHITE);
+        drawCenteredString(50, 0, WIDTH, 10, "Press DOWN if you'd like Cowboy Theme.", WHITE);
         drawImageDMA(70, (WIDTH - COWBOY_WIDTH) / 2, COWBOY_WIDTH, COWBOY_HEIGHT, cowboy);
 
         state = ASK_PREFERENCE_REGULAR;
